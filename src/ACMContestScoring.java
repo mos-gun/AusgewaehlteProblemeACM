@@ -1,45 +1,63 @@
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.Scanner;
-//
-//public class ACMContestScoring {
-//	public static void main(String[] args) {
-//		Scanner scanner = new Scanner(System.in);
-//		int numOfMinutes, numOfCorrect = 0, numOfPoints = 0;
-//		char letterOfProblem;
-//		String submissionResult;
-//		ArrayList<ArrayList<String>> listSubmissions = new ArrayList<>();
-//		ArrayList<String> listTempSubmission;
-//		HashMap<String, String> mapMinutes = new HashMap<>();
-//		HashMap<String, String> mapCorrectProblems = new HashMap<>();
-//
-//		while (true) {
-//			numOfMinutes = scanner.nextInt();
-//			if (numOfMinutes == - 1) break;
-//			listTempSubmission = new ArrayList<>();
-//			listTempSubmission.add(String.valueOf(numOfMinutes));
-//			listTempSubmission.add(String.valueOf(scanner.next().charAt(0)));
-//			listTempSubmission.add(scanner.nextLine().trim());
-//			listSubmissions.add(listTempSubmission);
-//		}
-//		int lenListSubmissions = listSubmissions.size();
-//
-//		for (int i = 1; i <= lenListSubmissions; i++) {
-//			if (! mapMinutes.containsKey(listSubmissions.get(lenListSubmissions - i).get(0))) {                             // if minutes slot not already used
-//				if (! mapCorrectProblems.containsKey(listSubmissions.get(lenListSubmissions - i).get(1))) {                 // if problem not inside correct map
-//					if (listSubmissions.get(lenListSubmissions - i).get(2).equals("right")) {                               // if submission is correct
-//						numOfPoints += Integer.parseInt(listSubmissions.get(lenListSubmissions - i).get(0));                // add points to numOfPoints
-//						mapMinutes.put(listSubmissions.get(lenListSubmissions - i).get(0), null);							// add points to mapMinutes
-//						mapCorrectProblems.put(listSubmissions.get(lenListSubmissions-i).get(1), null);						// add right problem letter to mapCorrectProblems
-//					} else {																								
-//						numOfPoints += 20;																					// add 20 penalty points to total if minute slot free, problem not correct and submission wrong
-//					}
-//				} else {
-//					
-//				}
-//			}
-//		}
-//
-////		System.out.println(numOfCorrect + " " + numOfPoints);
-//	}
-//}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+
+/**
+ * Ausgewählte Probleme aus dem ACM Programming Contest  WS 2019/20
+ * Problem:  acm ACM Contest Scoring
+ * Link: https://open.kattis.com/problems/acm ;
+ *
+ * @author Mosgun Mahdere
+ * @version 1.0, 11/21/2019
+ * Method : HashMap
+ * Status : ACCEPTED
+ * Runtime: 0.17s
+ */
+
+class ACMContestScoring {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int lenOfList, totalPoints = 0, numOfCorrect = 0;
+		int time;
+		char letterOfProblem;
+		boolean submissionCorrect;
+		String line;
+		ArrayList<String> listData = new ArrayList<>();
+		HashMap<Character, Character> mapCorrectSubmissions = new HashMap<>();
+		HashMap<Character, Character> mapIrrelevantSubmissions = new HashMap<>();
+
+		while (true) {                                                                            // read all lines
+			line = scanner.nextLine();
+			if (line.equals("-1")) break;
+			listData.add(line);
+		}
+		lenOfList = listData.size();
+
+		for (int i = lenOfList - 1; i >= 0; i--) {                                              // iterate end to start
+			Object[] arrObjects = listData.get(i).split(" ");
+			time = Integer.parseInt(String.valueOf(arrObjects[0]));
+			letterOfProblem = arrObjects[1].toString().charAt(0);
+			if (String.valueOf(arrObjects[2]).startsWith("w")) submissionCorrect = false;
+			else submissionCorrect = true;
+
+			if (mapIrrelevantSubmissions.containsKey(letterOfProblem)) {                    // if problem never solved,
+				continue;                                                                    // ignore
+			}
+
+			if (! mapCorrectSubmissions.containsKey(letterOfProblem)) {            // if problem is not in solved map
+				if (submissionCorrect) {                                            // if problem solved
+					mapCorrectSubmissions.put(letterOfProblem, null);                // add to map of correct problems
+					totalPoints += time;                                            // add time to points
+					numOfCorrect++;                                                    // increment num of right answers
+				} else {                                                            // if problem not solved
+					if (! mapIrrelevantSubmissions.containsKey(letterOfProblem)) {    // if problem not in irrelevant
+						mapIrrelevantSubmissions.put(letterOfProblem, null);        // add to map of irrelevant problems
+					}
+				}
+			} else {                                                                // if problem is in solved map
+				totalPoints += 20;                                                    // add 20 penalty points
+			}
+		}
+		System.out.println(numOfCorrect + " " + totalPoints);
+	}
+}

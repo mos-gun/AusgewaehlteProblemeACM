@@ -45,7 +45,7 @@ class Kattio extends PrintWriter {
         super(new BufferedOutputStream(o));
         r = new BufferedReader(new InputStreamReader(i));
     }
-
+    
     public boolean hasMoreTokens() {
         return peekToken() != null;
     }
