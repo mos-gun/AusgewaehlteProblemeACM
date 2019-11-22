@@ -11,7 +11,6 @@ import java.util.Scanner;
  * Status : ACCEPTED
  * Runtime: 0.21s
  */
-
 public class AlphabetSpam {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -32,11 +31,5 @@ public class AlphabetSpam {
 		System.out.println((double) numOfLowercaseLetters / sum);
 		System.out.println((double) numOfUppercaseLetters / sum);
 		System.out.println((double) numOfSymbols / sum);
-
-		System.out.println(numOfWhitespaces);
-		System.out.println(numOfLowercaseLetters);
-		System.out.println(numOfUppercaseLetters);
-		System.out.println(numOfSymbols);
-		System.out.println(sum);
 	}
 }

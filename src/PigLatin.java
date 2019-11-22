@@ -11,7 +11,6 @@ import java.io.*;
  * Status : ACCEPTED
  * Runtime: 0.65s
  */
-
 class PigLatin {
 	public static void main(String[] args) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

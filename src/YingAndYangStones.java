@@ -11,7 +11,6 @@ import java.util.Scanner;
  * Status : ACCEPTED
  * Runtime: 0.21s
  */
-
 public class YingAndYangStones {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);

@@ -13,7 +13,6 @@ import java.util.Scanner;
  * Status : ACCEPTED
  * Runtime: 0.17s
  */
-
 class ACMContestScoring {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);

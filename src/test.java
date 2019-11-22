@@ -6,6 +6,7 @@ public class test {
 		long timeStart = getTime();
 		long start = new Date().getTime();
 		int num = 100;
+		System.out.println(Integer.MAX_VALUE);
 		for (int i = 1; i <= num; i++) {
 			System.out.print(i);
 		}

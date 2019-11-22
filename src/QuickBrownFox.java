@@ -11,7 +11,6 @@ import java.util.*;
  * Status : ACCEPTED
  * Runtime: 0.14s
  */
-
 public class QuickBrownFox {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
